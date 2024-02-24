@@ -1,5 +1,4 @@
 #!/home/aleks/PycharmProjects/cli-app/.venv/bin/python
-import argparse
 import sys
 from googletrans.client import Translator
 from googletrans.client import LANGCODES, LANGUAGES
@@ -38,7 +37,6 @@ def run_interactive():
 
 if __name__ == '__main__':
     t = Translator()
-    parser = argparse.ArgumentParser()
     args = sys.argv[1:]
     if not args:
         print(__doc__)
