@@ -11,6 +11,7 @@ __doc__ = """\033[1m\033[33mCLI app to translate inline text\033[m
     > --help: returns this message;
     > -l or --language: translation language;
     > -i or --input: input text;
+    > --interactive: interactive mode;
 
 \033[3m\033[33mUsage:\033[m
     \033[32mtransl -l russian -i "hello, this is an app to translate text"\033[m
