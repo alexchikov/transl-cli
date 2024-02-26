@@ -1,7 +1,9 @@
 #!/home/aleks/PycharmProjects/cli-app/.venv/bin/python
 import sys
+import requests as rq
 from googletrans.client import Translator
 from googletrans.client import LANGCODES, LANGUAGES
+from requests.exceptions import ConnectionError, ConnectTimeout
 
 __doc__ = """\033[1m\033[33mCLI app to translate inline text\033[m
 
@@ -28,14 +30,26 @@ def run_interactive():
             print(translation.text)
             text = input("(interactive): ")
         else:
-            print('\nexit')
+            print('exit')
             sys.exit(1)
     except KeyboardInterrupt:
         print('\nexit')
         sys.exit(1)
 
+def check_connection():
+    try:
+        request = rq.get("https://translate.google.com/").status_code
+        if 200 <= request < 300:
+            return True
+        else:
+            return False
+    except (ConnectionError, ConnectTimeout):
+        return False
 
 if __name__ == '__main__':
+    if not check_connection():
+        print('No connection to translator')
+        sys.exit(2)
     t = Translator()
     args = sys.argv[1:]
     if not args:
